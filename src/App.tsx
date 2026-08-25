@@ -17,6 +17,7 @@ function MainAppContent() {
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [showCertModal, setShowCertModal] = useState(false);
 
   const handleOpenLightbox = (item: GalleryItem, index: number) => {
     const actualIndex = galleryItems.findIndex((i) => i.id === item.id);
@@ -76,6 +77,33 @@ function MainAppContent() {
         {/* 4. Public Communication & MC Track Record */}
         <SpeakingSection onOpenContact={handleScrollToContact} />
 
+        {/* LISENSI & SERTIFIKASI SECTION */}
+        <div className="mb-24 pt-12 border-t border-slate-100 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-10">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Lisensi & Sertifikasi</h2>
+            <p className="text-slate-600 text-lg">Validasi kompetensi profesional dan pengakuan standar industri nasional.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* BNSP Certificate Card */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Certified Video Editor</h3>
+              <p className="text-slate-500 text-sm mb-6 flex-1">Badan Nasional Sertifikasi Profesi (BNSP) - LSP Digital Teknologi Informasi Indonesia.</p>
+              
+              <button 
+                onClick={() => setShowCertModal(true)}
+                className="w-full py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                Pratinjau Dokumen
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* 5. Contact & Booking Form */}
         <ContactSection />
       </main>
@@ -97,6 +125,36 @@ function MainAppContent() {
         isOpen={isCVOpen}
         onClose={() => setIsCVOpen(false)}
       />
+
+      {/* PDF CERTIFICATE MODAL */}
+      {showCertModal && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6" onClick={() => setShowCertModal(false)}>
+          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative animate-in zoom-in duration-300" onClick={(e) => e.stopPropagation()}>
+            
+            {/* Modal Header */}
+            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                Sertifikat BNSP - Certified Video Editor
+              </h3>
+              <button onClick={() => setShowCertModal(false)} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            {/* PDF Viewer (iframe) */}
+            <div className="flex-1 w-full h-full bg-slate-100">
+              <iframe 
+                src="/sertifikat-bnsp.pdf" 
+                className="w-full h-full border-none"
+                title="Sertifikat BNSP Toni Windra"
+              >
+                <p className="text-center mt-10 text-slate-500">Browser Anda tidak mendukung pratinjau PDF. <a href="/sertifikat-bnsp.pdf" className="text-blue-600 underline">Unduh di sini</a>.</p>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
