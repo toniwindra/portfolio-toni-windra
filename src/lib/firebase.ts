@@ -64,7 +64,7 @@ const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 let firestoreDb;
 try {
   firestoreDb = initializeFirestore(app, { 
-    experimentalAutoDetectLongPolling: true 
+    experimentalForceLongPolling: true 
   }, firestoreDatabaseId || '(default)');
 } catch (e) {
   // If already initialized (e.g., during HMR)

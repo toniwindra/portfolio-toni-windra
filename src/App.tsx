@@ -21,6 +21,12 @@ function MainAppContent() {
   const [showCvesModal, setShowCvesModal] = useState(false);
   const [activeLegalPdf, setActiveLegalPdf] = useState<string | null>(null);
 
+  const trackGAEvent = (eventName: string, eventParams: any = {}) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', eventName, eventParams);
+    }
+  };
+
   const legalDocuments = [
     {
       id: "akta",
@@ -86,7 +92,7 @@ function MainAppContent() {
 
       {/* Floating Light Frosted Glass Navigation Bar */}
       <Navbar
-        onOpenCV={() => setIsCVOpen(true)}
+        onOpenCV={() => { setIsCVOpen(true); trackGAEvent('view_cv', { method: 'button_click' }); }}
         onOpenContact={handleScrollToContact}
       />
 
@@ -94,7 +100,7 @@ function MainAppContent() {
       <main className="relative z-10">
         {/* 1. Hero Section (Pristine Light Layout with Large Cutout Portrait) */}
         <HeroSection
-          onOpenCV={() => setIsCVOpen(true)}
+          onOpenCV={() => { setIsCVOpen(true); trackGAEvent('view_cv', { method: 'button_click' }); }}
           onOpenContact={handleScrollToContact}
         />
 
@@ -144,7 +150,7 @@ function MainAppContent() {
                 </p>
                 
                 <button 
-                  onClick={() => setShowCertModal(true)}
+                  onClick={() => { setShowCertModal(true); trackGAEvent('view_certificate', { certificate_name: 'BNSP' }); }}
                   className="w-full py-3 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -179,7 +185,7 @@ function MainAppContent() {
                 </p>
                 
                 <button 
-                  onClick={() => setShowCvesModal(true)}
+                  onClick={() => { setShowCvesModal(true); trackGAEvent('view_certificate', { certificate_name: 'CVES' }); }}
                   className="w-full py-3 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -206,7 +212,7 @@ function MainAppContent() {
                 <div className="p-5 flex flex-col flex-1">
                   <h3 className="text-base font-bold text-slate-900 mb-1">{doc.title}</h3>
                   <p className="text-slate-500 text-xs mb-4 flex-1">{doc.subtitle}</p>
-                  <button onClick={() => setActiveLegalPdf(doc.pdf)} className="w-full py-2 bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                  <button onClick={() => { setActiveLegalPdf(doc.pdf); trackGAEvent('view_legal_document', { document_title: doc.title }); }} className="w-full py-2 bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                     Lihat
                   </button>
