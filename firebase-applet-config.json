@@ -1,0 +1,12 @@
+{
+  "projectId": "portofolio-toni",
+  "appId": "1:294720593176:web:38166d49b33779f0d4d26d",
+  "apiKey": "AIzaSyCw5oSpp2NPRbxPK79NoxNPImygaCeAyBQ",
+  "authDomain": "portofolio-toni.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "portofolio-toni.firebasestorage.app",
+  "messagingSenderId": "294720593176",
+  "measurementId": "G-CL6E5KJ470",
+  "oAuthClientId": "",
+  "recaptchaSiteKey": ""
+}

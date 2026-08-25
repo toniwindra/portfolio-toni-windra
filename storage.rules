@@ -1,0 +1,24 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Allow public read and write access to portfolio_gallery items
+    match /portfolio_gallery/{allPaths=**} {
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+    
+    // Allow general media assets
+    match /uploads/{allPaths=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Default fallback rule for other storage locations
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

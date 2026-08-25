@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // portfolio_gallery collection: readable by anyone, writable by admin/authorized app
+    match /portfolio_gallery/{document} {
+      allow read: if true;
+      allow write: if true;
+    }
+    // contact_messages collection
+    match /contact_messages/{document} {
+      allow read, write: if true;
+    }
+    // site_settings collection
+    match /site_settings/{document} {
+      allow read: if true;
+      allow write: if true;
+    }
+    // Default rule
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
