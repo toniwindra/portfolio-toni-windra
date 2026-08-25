@@ -18,6 +18,7 @@ function MainAppContent() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showCertModal, setShowCertModal] = useState(false);
+  const [showCvesModal, setShowCvesModal] = useState(false);
 
   const handleOpenLightbox = (item: GalleryItem, index: number) => {
     const actualIndex = galleryItems.findIndex((i) => i.id === item.id);
@@ -119,6 +120,41 @@ function MainAppContent() {
                 </button>
               </div>
             </div>
+
+            {/* CVES Certificate Card (Media Card Layout) */}
+            <div className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full overflow-hidden">
+              
+              {/* Thumbnail Banner Area */}
+              <div className="w-full h-48 bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                <img 
+                  src="https://i.ibb.co.com/8Q2YTZT/Screenshot-2026-08-25-171547.png" 
+                  alt="Thumbnail Sertifikat CVES" 
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  loading="lazy"
+                />
+                {/* Floating Verified Badge */}
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-blue-600 shadow-sm flex items-center gap-1.5 border border-white/20">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                  Terverifikasi
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Sertifikat CVES</h3>
+                <p className="text-slate-500 text-sm mb-6 flex-1 leading-relaxed">
+                  Certified Video Editing Specialist (CVES).
+                </p>
+                
+                <button 
+                  onClick={() => setShowCvesModal(true)}
+                  className="w-full py-3 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                  Pratinjau Dokumen
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -168,6 +204,36 @@ function MainAppContent() {
                 title="Sertifikat BNSP Toni Windra"
               >
                 <p className="text-center mt-10 text-slate-500">Browser Anda tidak mendukung pratinjau PDF. <a href="/sertifikat-bnsp.pdf" className="text-blue-600 underline">Unduh di sini</a>.</p>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CVES CERTIFICATE MODAL */}
+      {showCvesModal && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6" onClick={() => setShowCvesModal(false)}>
+          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative animate-in zoom-in duration-300" onClick={(e) => e.stopPropagation()}>
+            
+            {/* Modal Header */}
+            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                Sertifikat CVES
+              </h3>
+              <button onClick={() => setShowCvesModal(false)} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            {/* PDF Viewer (iframe) */}
+            <div className="flex-1 w-full h-full bg-slate-100">
+              <iframe 
+                src="/sertifikat-cves.pdf" 
+                className="w-full h-full border-none"
+                title="Sertifikat CVES Toni Windra"
+              >
+                <p className="text-center mt-10 text-slate-500">Browser Anda tidak mendukung pratinjau PDF. <a href="/sertifikat-cves.pdf" className="text-blue-600 underline">Unduh di sini</a>.</p>
               </iframe>
             </div>
           </div>
