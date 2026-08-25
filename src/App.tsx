@@ -19,6 +19,38 @@ function MainAppContent() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showCertModal, setShowCertModal] = useState(false);
   const [showCvesModal, setShowCvesModal] = useState(false);
+  const [activeLegalPdf, setActiveLegalPdf] = useState<string | null>(null);
+
+  const legalDocuments = [
+    {
+      id: "akta",
+      title: "Akta Pendirian CV",
+      subtitle: "Notaris Osmarwan Putra, SH., M.Kn.",
+      pdf: "/akta-thr.pdf",
+      img: "https://i.ibb.co.com/WQDwHPW/Screenshot-2026-08-25-173303.png"
+    },
+    {
+      id: "skt",
+      title: "SKT Kemenkumham",
+      subtitle: "Surat Keterangan Terdaftar",
+      pdf: "/skt-thr.pdf",
+      img: "https://i.ibb.co.com/HTX4tK1R/Screenshot-2026-08-25-173232.png"
+    },
+    {
+      id: "nib-thr",
+      title: "NIB THR Production",
+      subtitle: "Perizinan Berusaha Berbasis Risiko",
+      pdf: "/nib-thr.pdf",
+      img: "https://i.ibb.co.com/HTd7cMZx/Screenshot-2026-08-25-173324.png"
+    },
+    {
+      id: "nib-umc",
+      title: "NIB UMCreative",
+      subtitle: "Usaha Mikro - Pelatihan TIK",
+      pdf: "/nib-umc.pdf",
+      img: "https://i.ibb.co.com/p623GLq6/Screenshot-2026-08-25-173213.png"
+    }
+  ];
 
   const handleOpenLightbox = (item: GalleryItem, index: number) => {
     const actualIndex = galleryItems.findIndex((i) => i.id === item.id);
@@ -158,6 +190,32 @@ function MainAppContent() {
           </div>
         </div>
 
+        {/* LEGALITAS PERUSAHAAN SECTION */}
+        <div className="mb-24 pt-12 border-t border-slate-100 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="max-w-3xl mb-10">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Legalitas Perusahaan</h2>
+            <p className="text-slate-600 text-lg">Dokumen resmi pendaftaran badan usaha dan perizinan operasional.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {legalDocuments.map((doc) => (
+              <div key={doc.id} className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full overflow-hidden">
+                <div className="w-full h-32 bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                  <img src={doc.img} alt={doc.title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="text-base font-bold text-slate-900 mb-1">{doc.title}</h3>
+                  <p className="text-slate-500 text-xs mb-4 flex-1">{doc.subtitle}</p>
+                  <button onClick={() => setActiveLegalPdf(doc.pdf)} className="w-full py-2 bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    Lihat
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* 5. Contact & Booking Form */}
         <ContactSection />
       </main>
@@ -235,6 +293,26 @@ function MainAppContent() {
               >
                 <p className="text-center mt-10 text-slate-500">Browser Anda tidak mendukung pratinjau PDF. <a href="/sertifikat-cves.pdf" className="text-blue-600 underline">Unduh di sini</a>.</p>
               </iframe>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* DYNAMIC LEGAL PDF MODAL */}
+      {activeLegalPdf && (
+        <div className="fixed inset-0 z-[130] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6" onClick={() => setActiveLegalPdf(null)}>
+          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden relative animate-in zoom-in duration-300" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-center px-6 py-4 border-b border-slate-100 bg-slate-50">
+              <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                 <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                 Pratinjau Dokumen Legal
+              </h3>
+              <button onClick={() => setActiveLegalPdf(null)} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="flex-1 w-full h-full bg-slate-100">
+              <iframe src={activeLegalPdf} className="w-full h-full border-none" title="Dokumen Legal"></iframe>
             </div>
           </div>
         </div>
