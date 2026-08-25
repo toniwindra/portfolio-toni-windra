@@ -85,21 +85,39 @@ function MainAppContent() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* BNSP Certificate Card */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full">
-              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Certified Video Editor</h3>
-              <p className="text-slate-500 text-sm mb-6 flex-1">Badan Nasional Sertifikasi Profesi (BNSP) - LSP Digital Teknologi Informasi Indonesia.</p>
+            {/* BNSP Certificate Card (Media Card Layout) */}
+            <div className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full overflow-hidden">
               
-              <button 
-                onClick={() => setShowCertModal(true)}
-                className="w-full py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                Pratinjau Dokumen
-              </button>
+              {/* Thumbnail Banner Area */}
+              <div className="w-full h-48 bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                <img 
+                  src="https://i.ibb.co.com/bpPd6SY/Screenshot-2026-08-25-153529.png" 
+                  alt="Thumbnail Sertifikat BNSP" 
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  loading="lazy"
+                />
+                {/* Floating Verified Badge */}
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-blue-600 shadow-sm flex items-center gap-1.5 border border-white/20">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                  Terverifikasi
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Certified Video Editor</h3>
+                <p className="text-slate-500 text-sm mb-6 flex-1 leading-relaxed">
+                  Badan Nasional Sertifikasi Profesi (BNSP) - LSP Digital Teknologi Informasi Indonesia.
+                </p>
+                
+                <button 
+                  onClick={() => setShowCertModal(true)}
+                  className="w-full py-3 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                  Pratinjau Dokumen
+                </button>
+              </div>
             </div>
           </div>
         </div>
