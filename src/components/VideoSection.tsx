@@ -165,6 +165,30 @@ export const VideoSection: React.FC = () => {
           {(() => {
             const videoPortfolio = [
               {
+                id: "e45qzTyBYMk",
+                title: "VIDEO PROFILE - FAKULTAS TEKNOLOGI INFORMASI UNAND",
+                category: "PROFILE",
+                description: "Fakultas Teknologi Informasi Universitas Andalas hadir untuk mencetak talenta unggul yang siap membawa perubahan melalui dunia digital.",
+                embedUrl: "https://www.youtube.com/embed/e45qzTyBYMk",
+                platform: "YouTube"
+              },
+              {
+                id: "PyCjwYB-q4o",
+                title: "Profile Fakultas Peternakan Terbaru 2025",
+                category: "PROFILE",
+                description: "Fakultas Peternakan percaya bahwa dengan komitmen yang kuat, kerja sama yang sinergis, dan inovasi berkelanjutan, visi dan misi yang telah ditetapkan dapat terwujud.",
+                embedUrl: "https://www.youtube.com/embed/PyCjwYB-q4o",
+                platform: "YouTube"
+              },
+              {
+                id: "FQHi2K_21Gk",
+                title: "SAFETY INDUCTION - FAKULTAS TEKNOLOGI INFORMASI UNAND",
+                category: "PROFILE",
+                description: "Video ini berisi panduan Safety Induction bagi seluruh sivitas akademika Fakultas Teknologi Informasi Universitas Andalas (FTI Unand).",
+                embedUrl: "https://www.youtube.com/embed/FQHi2K_21Gk",
+                platform: "YouTube"
+              },
+              {
                 id: 1,
                 title: "KAMPUS HIJAU",
                 category: "DOKUMENTER",
